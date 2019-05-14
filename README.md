@@ -55,7 +55,10 @@ sudo make notebook_image
 patch -p1 < ../env.patch
 sudo make build
 
-# Build ifcopenshell image
+# Change number of cores for build
+sed -i 's/-j[0-9]*/-j1/g' ../Dockerfile
+
+# Build ifcopenshell image (~ 8Go ) 
 sudo docker build -t jupyterhub-image-ifcopenshell ..
 
 # Start the server, only command necessary for subsequent runs
